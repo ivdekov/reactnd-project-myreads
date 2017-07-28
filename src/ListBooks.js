@@ -21,7 +21,23 @@ class ListBooks extends Component {
   updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf).then(data => {
       console.log(data);
-      //TODO: update state!
+      this.setState(prevState => {
+        if (shelf === 'none') {
+          return {
+            books: prevState.books.filter(
+              currentBook => currentBook.id !== book.id
+            )
+          };
+        }
+        return {
+          books: prevState.books.map(currentBook => {
+            if (currentBook.id === book.id) {
+              currentBook.shelf = shelf;
+            }
+            return currentBook;
+          })
+        };
+      });
     });
   };
   getBooksForShelf = shelf => {
