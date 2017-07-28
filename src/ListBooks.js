@@ -19,26 +19,24 @@ class ListBooks extends Component {
     });
   }
   updateBook = (book, shelf) => {
-    BooksAPI.update(book, shelf).then(data => {
-      console.log(data);
-      this.setState(prevState => {
-        if (shelf === 'none') {
-          return {
-            books: prevState.books.filter(
-              currentBook => currentBook.id !== book.id
-            )
-          };
-        }
+    this.setState(prevState => {
+      if (shelf === 'none') {
         return {
-          books: prevState.books.map(currentBook => {
-            if (currentBook.id === book.id) {
-              currentBook.shelf = shelf;
-            }
-            return currentBook;
-          })
+          books: prevState.books.filter(
+            currentBook => currentBook.id !== book.id
+          )
         };
-      });
+      }
+      return {
+        books: prevState.books.map(currentBook => {
+          if (currentBook.id === book.id) {
+            currentBook.shelf = shelf;
+          }
+          return currentBook;
+        })
+      };
     });
+    BooksAPI.update(book, shelf);
   };
   getBooksForShelf = shelf => {
     return this.state.books.filter(book => shelf.id === book.shelf);
