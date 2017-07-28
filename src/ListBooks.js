@@ -1,59 +1,32 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI';
+import Shelf from './Shelf';
 
 class ListBooks extends Component {
-  renderShelf(shelf) {
-    const filteredBooks = this.props.books.filter(
-      book => shelf.id === book.shelf
-    );
-    return (
-      <div key={shelf.id} className="bookshelf">
-        <h2 className="bookshelf-title">
-          {shelf.title}
-        </h2>
-        <div className="bookshelf-books">
-          <ol className="books-grid">
-            {filteredBooks.map(book => this.renderBook(book))}
-          </ol>
-        </div>
-      </div>
-    );
+  state = {
+    shelves: [
+      { id: 'currentlyReading', title: 'Currently Reading' },
+      { id: 'wantToRead', title: 'Want to Read' },
+      { id: 'read', title: 'Read' }
+    ],
+    books: []
+  };
+  componentDidMount() {
+    BooksAPI.getAll().then(books => {
+      console.log(books);
+      this.setState({ books });
+    });
   }
-  renderBook(book) {
-    return (
-      <li key={book.id}>
-        <div className="book">
-          <div className="book-top">
-            <div
-              className="book-cover"
-              style={{
-                width: 128,
-                height: 193,
-                backgroundImage: `url(${book.imageLinks.thumbnail})`
-              }}
-            />
-            <div className="book-shelf-changer">
-              <select>
-                <option value="none" disabled>
-                  Move to...
-                </option>
-                <option value="currentlyReading">Currently Reading</option>
-                <option value="wantToRead">Want to Read</option>
-                <option value="read">Read</option>
-                <option value="none">None</option>
-              </select>
-            </div>
-          </div>
-          <div className="book-title">
-            {book.title}
-          </div>
-          <div className="book-authors">
-            {book.authors.join(', ')}
-          </div>
-        </div>
-      </li>
-    );
-  }
+  updateBook = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(data => {
+      console.log(data);
+      //TODO: update state!
+    });
+  };
+  getBooksForShelf = shelf => {
+    return this.state.books.filter(book => shelf.id === book.shelf);
+  };
   render() {
     return (
       <div className="list-books">
@@ -62,7 +35,14 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            {this.props.shelves.map(shelf => this.renderShelf(shelf))}
+            {this.state.shelves.map(shelf =>
+              <Shelf
+                key={shelf.id}
+                shelf={shelf}
+                books={this.getBooksForShelf(shelf)}
+                updateBook={this.updateBook}
+              />
+            )}
           </div>
         </div>
         <div className="open-search">
