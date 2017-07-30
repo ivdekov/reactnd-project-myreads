@@ -32,7 +32,6 @@ class SearchBooks extends Component {
     this.setState({ books: correctlyShelvedBooks });
   }
   render() {
-    console.log(this.state.books);
     return (
       <div className="search-books">
         <div className="search-books-bar">
