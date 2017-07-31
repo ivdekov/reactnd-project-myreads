@@ -23,7 +23,7 @@ class Book extends Component {
                 value={this.props.book.shelf}
                 onChange={this.handleChange}
               >
-                <option value="none" disabled>
+                <option value="choose" disabled>
                   Move to...
                 </option>
                 <option value="currentlyReading">Currently Reading</option>
