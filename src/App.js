@@ -12,14 +12,15 @@ class BooksApp extends React.Component {
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       this.setState({ books });
-      // return this.addBookRating();
+      this.setBookRatings();
     });
   }
-  addBookRating = () => {
+  setBookRatings = () => {
     this.setState(({ books }) => {
       return {
         books: books.map(book => {
-          book.rating = 0;
+          const storedRating = localStorage.getItem(`${book.id}`);
+          book.rating = storedRating ? storedRating : 0;
           return book;
         })
       };
@@ -79,6 +80,8 @@ class BooksApp extends React.Component {
         })
       };
     });
+
+    localStorage.setItem(`${book.id}`, `${rating}`);
   };
   render() {
     return (
