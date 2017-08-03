@@ -27,6 +27,7 @@ class ListBooks extends Component {
                 shelf={shelf}
                 books={this.getBooksForShelf(shelf)}
                 updateBook={this.props.updateBook}
+                updateBookRating={this.props.updateBookRating}
               />
             )}
           </div>

@@ -12,8 +12,19 @@ class BooksApp extends React.Component {
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       this.setState({ books });
+      // return this.addBookRating();
     });
   }
+  addBookRating = () => {
+    this.setState(({ books }) => {
+      return {
+        books: books.map(book => {
+          book.rating = 0;
+          return book;
+        })
+      };
+    });
+  };
   isNewBook = book => {
     const matchedBooks = this.state.books.filter(
       myBook => myBook.id === book.id
@@ -57,6 +68,18 @@ class BooksApp extends React.Component {
 
     BooksAPI.update(book, shelf);
   };
+  updateBookRating = (book, rating) => {
+    this.setState(({ books }) => {
+      return {
+        books: books.map(currentBook => {
+          if (currentBook.id === book.id) {
+            currentBook.rating = rating;
+          }
+          return currentBook;
+        })
+      };
+    });
+  };
   render() {
     return (
       <div className="app">
@@ -67,6 +90,7 @@ class BooksApp extends React.Component {
             <ListBooks
               books={this.state.books}
               updateBook={this.handleShelfChange}
+              updateBookRating={this.updateBookRating}
             />}
         />
         <Route

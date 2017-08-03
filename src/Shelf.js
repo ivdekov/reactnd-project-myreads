@@ -15,6 +15,7 @@ class Shelf extends Component {
                 key={book.id}
                 book={book}
                 onShelfChange={this.props.updateBook}
+                updateRating={this.props.updateBookRating}
               />
             )}
           </ol>
