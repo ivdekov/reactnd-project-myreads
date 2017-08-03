@@ -42,7 +42,6 @@ class Book extends Component {
           </div>
           <BookRating
             book={this.props.book}
-            rating={this.props.book.rating}
             updateRating={this.props.updateRating}
           />
         </div>

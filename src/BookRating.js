@@ -3,7 +3,7 @@ import FontAwesome from 'react-fontawesome';
 
 class BookRating extends Component {
   render() {
-    const { rating } = this.props;
+    const rating = this.props.book.rating;
     const stars = [
       <FontAwesome name="star-o" size="lg" />,
       <FontAwesome name="star-o" size="lg" />,
