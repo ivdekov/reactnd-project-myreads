@@ -16,6 +16,7 @@ class Shelf extends Component {
                 book={book}
                 onShelfChange={this.props.updateBook}
                 updateRating={this.props.updateBookRating}
+                displayRating={true}
               />
             )}
           </ol>

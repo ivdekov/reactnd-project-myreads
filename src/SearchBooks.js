@@ -67,6 +67,7 @@ class SearchBooks extends Component {
                 key={book.id}
                 book={book}
                 onShelfChange={this.props.updateBook}
+                displayRating={false}
               />
             )}
           </ol>

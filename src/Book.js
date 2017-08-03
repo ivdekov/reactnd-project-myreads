@@ -40,10 +40,11 @@ class Book extends Component {
           <div className="book-authors">
             {this.props.book.authors && this.props.book.authors.join(', ')}
           </div>
-          <BookRating
-            book={this.props.book}
-            updateRating={this.props.updateRating}
-          />
+          {this.props.displayRating &&
+            <BookRating
+              book={this.props.book}
+              updateRating={this.props.updateRating}
+            />}
         </div>
       </li>
     );
