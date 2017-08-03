@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BookRating from './BookRating';
 
 class Book extends Component {
   handleChange = event => {
@@ -39,6 +40,7 @@ class Book extends Component {
           <div className="book-authors">
             {this.props.book.authors && this.props.book.authors.join(', ')}
           </div>
+          <BookRating />
         </div>
       </li>
     );
