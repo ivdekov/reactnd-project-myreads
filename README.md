@@ -3,8 +3,8 @@ This is the MyReads final assessment project for Udacity's React Fundamentals co
 ## Installation And Launch Instructions
 1. Clone this repository onto your machine.
 2. Open the terminal and change the directory to the newly cloned project folder.
-3. Type `npm install` in the terminal and after the command finishes...
-4. ... type `npm start` in the terminal.
+3. Run `npm install`.
+4. Run `npm start`.
 
 ## Important
 The backend API uses a fixed set of cached search results and is limited to a particular set of search terms, which can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md). That list of terms are the _only_ terms that will work with the backend, so don't be surprised if your searches for Basket Weaving or Bubble Wrap don't come back with any results. 
